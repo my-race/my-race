@@ -1,0 +1,21 @@
+{
+  "name": "my-race",
+  "version": "1.0.0",
+  "description": "for runner",
+  "main": "index.js",
+  "author": "bran",
+  "license": "MIT",
+  "private": true,
+  "packageManager": "yarn@1.22.22",
+   "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "devDependencies": {
+    "turbo": "^2.5.3"
+  },
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build"
+  }
+}

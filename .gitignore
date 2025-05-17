@@ -1,0 +1,27 @@
+# Node
+node_modules/
+npm-debug.log*
+yarn-error.log*
+
+# Turbo / Monorepo
+.turbo/
+dist/
+.next/
+expo/
+
+# OS
+.DS_Store
+
+# IDE
+.idea/
+.vscode/
+
+# Expo (React Native)
+*.apk
+*.aab
+*.ipa
+.expo/
+.expo-shared/
+
+# macOS system files
+*.swp
