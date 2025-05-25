@@ -16,6 +16,7 @@
     "@commitlint/config-conventional": "^19.8.1",
     "@typescript-eslint/eslint-plugin": "^8.32.1",
     "@typescript-eslint/parser": "^8.32.1",
+    "concurrently": "^9.1.2",
     "eslint": "^9.27.0",
     "eslint-config-prettier": "^10.1.5",
     "eslint-plugin-import": "^2.31.0",
@@ -41,6 +42,9 @@
   },
   "scripts": {
     "dev": "turbo run dev",
-    "build": "turbo run build"
+    "build": "turbo run build",
+    "dev:web": "turbo run dev --filter=web",
+    "dev:mobile:clean": "yarn workspace mobile dev:clean",
+    "dev:clean": "concurrently \"yarn dev:web\" \"yarn dev:mobile:clean\""
   }
 }

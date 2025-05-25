@@ -25,3 +25,6 @@ expo/
 
 # macOS system files
 *.swp
+
+# env
+.env.*
