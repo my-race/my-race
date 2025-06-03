@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "my-race",
-    "slug": "mobile",
+    "name": "My Race",
+    "slug": "my-race",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -33,6 +33,11 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "eas": {
+        "projectId": "59cb161f-db78-4895-b0e3-af7e7b995b06"
+      }
     }
   }
 }
