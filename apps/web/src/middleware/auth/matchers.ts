@@ -1,5 +1,5 @@
 // 제외할 경로 목록
-const EXCLUDE_PATHS = ["api", "_next", "favicon.ico", "login"];
+const EXCLUDE_PATHS = ["api", "_next", "favicon.ico", "login", "assets"];
 
 export const protectedPathRegex = new RegExp(
   `^/(?!(${EXCLUDE_PATHS.join("|")}))(.*)?`,

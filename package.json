@@ -8,8 +8,7 @@
   "private": true,
   "packageManager": "yarn@1.22.22",
   "workspaces": [
-    "apps/*",
-    "packages/*"
+    "apps/*"
   ],
   "devDependencies": {
     "@commitlint/cli": "^19.8.1",

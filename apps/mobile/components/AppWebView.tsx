@@ -1,13 +1,10 @@
+import { authHosts, serviceHosts } from "@/constants/Hosts";
 import { useWebUrlStore } from "@/stores/webUrl";
 import { getIpAddressAsync } from "expo-network";
+import { SafeAreaView } from "react-native-safe-area-context";
 import WebView from "react-native-webview";
 
-const allowedHosts = [
-  "my-race.local",
-  "localhost",
-  "dev.my-race.com",
-  "my-race.com",
-];
+const allowedHosts = [...serviceHosts, ...authHosts];
 
 if (__DEV__) getIpAddressAsync().then((ip) => allowedHosts.push(ip));
 
@@ -28,22 +25,24 @@ export default function AppWebView() {
   }
 
   return (
-    <WebView
-      source={{ uri: url }}
-      style={{ flex: 1 }}
-      originWhitelist={["*"]}
-      onShouldStartLoadWithRequest={(request) => {
-        const isAllowed = isAllowedHost(request.url);
-        if (!isAllowed) {
-          console.warn("❌ Blocked navigation to:", request.url);
-        }
-        return isAllowed;
-      }}
-      onNavigationStateChange={(navState) => {
-        if (navState.url && isAllowedHost(navState.url)) {
-          setUrl(navState.url);
-        }
-      }}
-    />
+    <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
+      <WebView
+        source={{ uri: url }}
+        style={{ flex: 1 }}
+        originWhitelist={["*"]}
+        onShouldStartLoadWithRequest={(request) => {
+          const isAllowed = isAllowedHost(request.url);
+          if (!isAllowed) {
+            console.warn("❌ Blocked navigation to:", request.url);
+          }
+          return isAllowed;
+        }}
+        onNavigationStateChange={(navState) => {
+          if (navState.url && isAllowedHost(navState.url)) {
+            setUrl(navState.url);
+          }
+        }}
+      />
+    </SafeAreaView>
   );
 }
