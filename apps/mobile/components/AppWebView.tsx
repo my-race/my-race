@@ -4,7 +4,7 @@ import WebView from "react-native-webview";
 const allowedHosts = [
   "my-race.local",
   "localhost",
-  "172.30.1.66",
+  "172.20.10.6",
   "dev.my-race.com",
   "my-race.com",
 ];
@@ -22,14 +22,14 @@ export default function AppWebView() {
   const { url, setUrl } = useWebUrlStore();
   if (!url) {
     console.warn("No URL set in WebView");
-    return null; // URL이 없으면 아무것도 렌더링하지 않음
+    return null;
   }
 
   return (
     <WebView
-      source={{ uri: url }} // 기본 시작 주소
+      source={{ uri: url }}
       style={{ flex: 1 }}
-      originWhitelist={["*"]} // 개발 중이면 일단 열어두고, 실제 차단은 아래에서
+      originWhitelist={["*"]}
       onShouldStartLoadWithRequest={(request) => {
         const isAllowed = isAllowedHost(request.url);
         if (!isAllowed) {
@@ -39,7 +39,7 @@ export default function AppWebView() {
       }}
       onNavigationStateChange={(navState) => {
         if (navState.url && isAllowedHost(navState.url)) {
-          setUrl(navState.url); // 현재 페이지 주소로 store 업데이트
+          setUrl(navState.url);
         }
       }}
     />
