@@ -12,8 +12,6 @@ export default function Index() {
   const { setUrl, url } = useWebUrlStore();
 
   useEffect(() => {
-    console.log(123);
-
     const checkUrl = async () => {
       if (url) return;
 

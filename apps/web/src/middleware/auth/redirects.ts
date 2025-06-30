@@ -4,5 +4,6 @@ export function redirectToLogin(req: NextRequest) {
   const url = req.nextUrl.clone();
   url.pathname = "/login";
   url.searchParams.set("callbackUrl", req.nextUrl.pathname);
+  console.log("in redirect", req.nextUrl.pathname);
   return NextResponse.redirect(url);
 }

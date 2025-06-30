@@ -1,13 +1,15 @@
 import { useWebUrlStore } from "@/stores/webUrl";
+import { getIpAddressAsync } from "expo-network";
 import WebView from "react-native-webview";
 
 const allowedHosts = [
   "my-race.local",
   "localhost",
-  "172.20.10.6",
   "dev.my-race.com",
   "my-race.com",
 ];
+
+if (__DEV__) getIpAddressAsync().then((ip) => allowedHosts.push(ip));
 
 function isAllowedHost(urlString: string): boolean {
   try {

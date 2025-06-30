@@ -18,6 +18,6 @@ declare module "next-auth" {
 declare module "next-auth/jwt" {
   interface JWT {
     accessToken?: string;
-    sub?: string; // 이게 token.sub
+    sub?: string;
   }
 }
