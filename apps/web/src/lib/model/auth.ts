@@ -1,4 +1,3 @@
-export interface AuthUrl {
-  authUrl: string;
-  redirectUri: string;
+export interface KakaoLogin {
+  accessToken: string;
 }
