@@ -1,5 +1,5 @@
-import LocalStorage from "../_services/LocalStorage";
-import { LocalStorageKey } from "../_services/LocalStorage.type";
+import LocalStorage from "../_services/LocalStorage/LocalStorage";
+import { LocalStorageKey } from "../_services/LocalStorage/LocalStorage.type";
 import { useAuthStore } from "../_stores/useAuthStore";
 
 const useAuth = () => {
