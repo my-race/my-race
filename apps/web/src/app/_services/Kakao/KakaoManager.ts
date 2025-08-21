@@ -1,6 +1,8 @@
 "use client";
 
 import { KakaoAuthorizeParams, KakaoSDK } from "apps/web/types/KakaoSDK";
+import SessionStorage from "../SessionStorage/SessionStorage";
+import { SessionStorageKey } from "../SessionStorage/SessionStorage.type";
 
 class KakaoManager {
   private static instance: KakaoManager;
@@ -33,15 +35,21 @@ class KakaoManager {
     }
   }
 
-  public login(): Promise<void> {
-    const settings: KakaoAuthorizeParams = {
-      redirectUri: "http://localhost:3000/login/auth/kakao",
-    };
-    const redirectUri = process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI;
-    if (redirectUri) settings.redirectUri = redirectUri;
+  public login(callbackUrl?: string): Promise<void> {
+    const serviceUri = process.env.NEXT_PUBLIC_SERVICE_URL;
+    let redirectUri = `${serviceUri}login/auth/kakao`;
+    if (callbackUrl) {
+      const sessionStorage = new SessionStorage();
+      sessionStorage.setItem(
+        SessionStorageKey.kakaoAuthCallbackUrl,
+        callbackUrl,
+      );
+    }
 
-    // Kakao.Auth.authorize는 페이지를 리디렉션하므로 반환값이 사실상 없습니다.
-    // Promise를 반환할 필요는 없지만, 비동기 작업임을 명시하기 위해 유지할 수 있습니다.
+    const settings: KakaoAuthorizeParams = {
+      redirectUri: redirectUri,
+    };
+
     this.sdk.Auth.authorize(settings);
     return Promise.resolve();
   }
@@ -54,7 +62,7 @@ class KakaoManager {
     });
   }
 
-  // 사용자 정보 타입은 필요에 따라 더 구체적으로 정의할 수 있습니다.
+  // TODO: 사용자 정보 가져오기
   public getUserInfo(): Promise<any> {
     return this.sdk.API.request({
       url: "/v2/user/me",
