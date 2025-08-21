@@ -26,7 +26,7 @@ const useAuth = () => {
     setTimeout(() => setUser({ name: "bran" }), 1000);
   };
 
-  const set = (token: string) => {
+  const setAuthInfo = (token: string) => {
     localStorageService.setItem(LocalStorageKey.TOKEN, token);
     setIsLoggedIn(true);
     loadUserInfo();
@@ -41,7 +41,7 @@ const useAuth = () => {
   return {
     user,
     isLoggedIn,
-    set,
+    setAuthInfo,
     logout,
   };
 };
