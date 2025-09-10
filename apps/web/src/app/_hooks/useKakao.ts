@@ -7,7 +7,7 @@ import KakaoManager from "../_services/Kakao/KakaoManager";
 
 interface UseKakaoResultLoaded {
   isLoaded: true;
-  login: () => Promise<void>;
+  login: (callbackUrl?: string) => Promise<void>;
 }
 
 interface UseKakaoResultNotLoaded {
@@ -22,10 +22,10 @@ const useKakao = (): UseKakaoResult => {
   } = useScriptLoadStatus();
   const [manager, setManager] = useState<KakaoManager | null>(null);
 
-  const login = useCallback(async () => {
+  const login = useCallback(async (callbackUrl?: string) => {
     if (!manager) throw Error("Kakao SDK not initialized.");
 
-    return manager.login();
+    return manager.login(callbackUrl);
   }, [manager]);
 
   useEffect(() => {

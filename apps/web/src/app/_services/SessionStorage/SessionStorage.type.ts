@@ -1,5 +1,5 @@
 export const SessionStorageKey = {
-  kakaoAuthCallbackUrl: "token",
+  kakaoAuthCallbackUrl: "kakaoAuthCallbackUrl",
 } as const;
 
 export type SessionStorageKey =

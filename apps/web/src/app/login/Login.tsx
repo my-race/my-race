@@ -3,7 +3,11 @@
 import { motion } from "framer-motion";
 import KakaoLoginButton from "./KakaoLoginButton";
 
-export default function Login() {
+interface LoginProps {
+  callbackUrl?: string;
+}
+
+export default function Login({ callbackUrl }: LoginProps) {
   return (
     <div className="flex flex-col justify-center items-center min-h-screen">
       <motion.div
@@ -34,7 +38,7 @@ export default function Login() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1.3, duration: 0.6, ease: "easeOut" }}
       >
-        <KakaoLoginButton />
+        <KakaoLoginButton callbackUrl={callbackUrl} />
       </motion.div>
     </div>
   );

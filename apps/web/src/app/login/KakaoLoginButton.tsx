@@ -4,13 +4,17 @@ import Image from "next/image";
 import useKakao from "../_hooks/useKakao";
 import { useCallback } from "react";
 
-export default function KakaoLoginButton() {
+interface KakaoLoginButtonProps {
+  callbackUrl?: string;
+}
+
+export default function KakaoLoginButton({ callbackUrl }: KakaoLoginButtonProps) {
   const kakao = useKakao();
   const handleClickKakaoLogin = useCallback(() => {
     if (kakao.isLoaded) {
-      return kakao.login();
+      return kakao.login(callbackUrl);
     }
-  }, [kakao]);
+  }, [kakao, callbackUrl]);
 
   return (
     <button
