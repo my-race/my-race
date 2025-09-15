@@ -18,7 +18,10 @@ const loginByKakao = async (
   let errorMessage: string | null;
   if (code) {
     try {
-      accessToken = (await postKakaoLogin({ access_token: code })).accessToken;
+      accessToken = (await postKakaoLogin({
+        code,
+        redirect_uri: `${process.env.NEXT_PUBLIC_SERVICE_URL}login/auth/kakao`
+      })).token;
       errorMessage = null;
     } catch (err: unknown) {
       accessToken = null;
@@ -42,7 +45,7 @@ const loginByKakao = async (
 export default async function AuthKakaoPage({
   searchParams,
 }: AuthKakaoPageProps) {
-  const { code } = await searchParams;
+  const { code } = searchParams;
 
   const { accessToken, errorMessage } = await loginByKakao(code);
 

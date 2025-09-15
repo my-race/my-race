@@ -1,7 +1,17 @@
 export interface PostKakaoLoginRequest {
-  access_token: string;
+  code: string;
+  redirect_uri: string;
 }
 
 export interface PostKakaoLoginResponse {
-  access_token: string;
+  message: string;
+  user: {
+    id: number;
+    email: string;
+    first_name: string;
+    last_name: string;
+    date_joined: string;
+    is_active: boolean;
+  };
+  token: string;
 }
