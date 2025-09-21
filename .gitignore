@@ -15,6 +15,7 @@ expo/
 # IDE
 .idea/
 .vscode/
+!.vscode/settings.json
 
 # Expo (React Native)
 *.apk

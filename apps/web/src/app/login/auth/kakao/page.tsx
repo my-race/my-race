@@ -1,6 +1,5 @@
-import { postKakaoLogin } from "apps/web/src/lib/api/auth";
+import { mockKakaoLogin } from "apps/web/src/lib/auth/mockAuth";
 import AuthKakao from "./AuthKakao";
-import { ApiError } from "apps/web/src/lib/api/ApiError";
 
 interface AuthKakaoPageProps {
   searchParams: {
@@ -8,46 +7,15 @@ interface AuthKakaoPageProps {
   };
 }
 
-const loginByKakao = async (
-  code?: string,
-): Promise<{
-  accessToken: string | null;
-  errorMessage: string | null;
-}> => {
-  let accessToken: string | null;
-  let errorMessage: string | null;
-  if (code) {
-    try {
-      accessToken = (await postKakaoLogin({
-        code,
-        redirect_uri: `${process.env.NEXT_PUBLIC_SERVICE_URL}login/auth/kakao`
-      })).token;
-      errorMessage = null;
-    } catch (err: unknown) {
-      accessToken = null;
-      if (err instanceof ApiError) {
-        errorMessage = err.response.error ?? `status: ${err.status}`;
-      } else {
-        const errAny: any = err;
-        errorMessage = (errAny?.message || errAny?.msg || errAny?.body) ?? null;
-      }
-    }
-  } else {
-    accessToken = null;
-    errorMessage = "Kakao code not exist";
-  }
-  return {
-    accessToken,
-    errorMessage,
-  };
-};
+
 
 export default async function AuthKakaoPage({
   searchParams,
 }: AuthKakaoPageProps) {
   const { code } = searchParams;
 
-  const { accessToken, errorMessage } = await loginByKakao(code);
+  const { accessToken, errorMessage } = await mockKakaoLogin(code);
+  // const { accessToken, errorMessage } = await loginByKakao(code);
 
   return (
     <AuthKakao

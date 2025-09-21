@@ -7,22 +7,33 @@ import { useAuthStore } from "../_stores/useAuthStore";
 
 const localStorageService = new LocalStorage();
 
+const setSessionCookie = (token: string) => {
+  if (typeof document !== 'undefined') {
+    document.cookie = `next-auth.session-token=${token}; path=/; max-age=${60 * 60 * 24 * 7}`; // 7일
+  }
+};
+
+const removeSessionCookie = () => {
+  if (typeof document !== 'undefined') {
+    document.cookie = "next-auth.session-token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+  }
+};
+
 const useAuth = () => {
   const { user, setUser } = useAuthStore();
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  // 2. useEffect를 사용해 클라이언트에서만 localStorage를 확인
   useEffect(() => {
     const token = localStorageService.getItem(LocalStorageKey.TOKEN);
     if (token) {
       setIsLoggedIn(true);
       loadUserInfo();
+      setSessionCookie(token);
     }
   }, []);
 
   const loadUserInfo = async () => {
-    // 실제로는 여기서 API 요청을 통해 사용자 정보를 가져옴
     setTimeout(() => setUser({ name: "bran" }), 1000);
   };
 
@@ -30,12 +41,14 @@ const useAuth = () => {
     localStorageService.setItem(LocalStorageKey.TOKEN, token);
     setIsLoggedIn(true);
     loadUserInfo();
+    setSessionCookie(token);
   };
 
   const logout = () => {
     localStorageService.removeItem(LocalStorageKey.TOKEN);
     setIsLoggedIn(false);
     setUser(null);
+    removeSessionCookie();
   };
 
   return {
