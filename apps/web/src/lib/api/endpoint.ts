@@ -1,5 +1,5 @@
 export const ENDPOINTS = {
-  auth: "users/auth/kakao/url/",
+  authKakao: "users/auth/kakao/",
 } as const;
 
 export type ENDPOINTS = typeof ENDPOINTS;

@@ -1,21 +1,26 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import Image from "next/image";
+import useKakao from "../_hooks/useKakao";
+import { useCallback } from "react";
 
 interface KakaoLoginButtonProps {
-  authUrl: string;
+  callbackUrl?: string;
 }
 
-export default function KakaoLoginButton({ authUrl }: KakaoLoginButtonProps) {
-  const router = useRouter();
-  const handleLogin = () => {
-    router.push(authUrl);
-  };
+export default function KakaoLoginButton({ callbackUrl }: KakaoLoginButtonProps) {
+  const kakao = useKakao();
+  const handleClickKakaoLogin = useCallback(() => {
+    if (kakao.isLoaded) {
+      return kakao.login(callbackUrl);
+    }
+  }, [kakao, callbackUrl]);
+
   return (
     <button
-      onClick={handleLogin}
+      onClick={handleClickKakaoLogin}
       className="border-0 bg-transparent p-0 cursor-pointer hover:opacity-80 transition-opacity"
+      disabled={!kakao.isLoaded}
     >
       <Image
         src="/assets/auth/kakao_login_ko_large_wide.png"
