@@ -1,23 +1,23 @@
 // app/api/auth/[...nextauth]/route.ts
-import NextAuth from "next-auth";
-import KakaoProvider from "next-auth/providers/kakao";
-import type { NextAuthOptions } from "next-auth";
+import type { NextAuthOptions } from 'next-auth';
+import NextAuth from 'next-auth';
+import KakaoProvider from 'next-auth/providers/kakao';
 
 export const authOptions: NextAuthOptions = {
   providers: [
     KakaoProvider({
       clientId: process.env.KAKAO_CLIENT_ID!,
-      clientSecret: process.env.KAKAO_CLIENT_SECRET || "",
+      clientSecret: process.env.KAKAO_CLIENT_SECRET || '',
     }),
   ],
   callbacks: {
     async signIn({ user, account, profile }) {
-      console.log("Kakao Profile:", profile);
+      console.log('Kakao Profile:', profile);
 
       //  백엔드 회원가입/로그인 로직
-      const res = await fetch("https://your-backend.com/api/auth/kakao", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+      const res = await fetch('https://your-backend.com/api/auth/kakao', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ accessToken: account?.access_token }),
       });
 

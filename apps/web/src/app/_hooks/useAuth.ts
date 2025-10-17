@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { useState, useEffect } from "react";
-import LocalStorage from "../_services/LocalStorage/LocalStorage";
-import { LocalStorageKey } from "../_services/LocalStorage/LocalStorage.type";
-import { useAuthStore } from "../_stores/useAuthStore";
+import { useEffect, useState } from 'react';
+import LocalStorage from '../_services/LocalStorage/LocalStorage';
+import { LocalStorageKey } from '../_services/LocalStorage/LocalStorage.type';
+import { useAuthStore } from '../_stores/useAuthStore';
 
 const localStorageService = new LocalStorage();
 
@@ -15,7 +15,8 @@ const setSessionCookie = (token: string) => {
 
 const removeSessionCookie = () => {
   if (typeof document !== 'undefined') {
-    document.cookie = "next-auth.session-token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+    document.cookie =
+      'next-auth.session-token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT';
   }
 };
 
@@ -34,7 +35,7 @@ const useAuth = () => {
   }, []);
 
   const loadUserInfo = async () => {
-    setTimeout(() => setUser({ name: "bran" }), 1000);
+    setTimeout(() => setUser({ name: 'bran' }), 1000);
   };
 
   const setAuthInfo = (token: string) => {

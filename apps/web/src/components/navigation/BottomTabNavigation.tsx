@@ -1,14 +1,7 @@
 'use client';
 
-import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
-import {
-  faCalendar,
-  faFlagCheckered,
-  faUser,
-  faUsers,
-} from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { motion } from 'framer-motion';
+import { Flag, Info, User, Users, LucideIcon } from 'lucide-react';
 import { usePathname, useRouter } from 'next/navigation';
 import { useScrollStore } from '../../app/_stores/useScrollStore';
 
@@ -16,7 +9,7 @@ interface TabItem {
   id: string;
   label: string;
   path: string;
-  icon: IconDefinition;
+  icon: LucideIcon;
 }
 
 const tabs: TabItem[] = [
@@ -24,25 +17,25 @@ const tabs: TabItem[] = [
     id: 'races',
     label: '대회 목록',
     path: '/races',
-    icon: faFlagCheckered,
+    icon: Flag,
   },
   {
-    id: 'reservations',
-    label: '예약',
-    path: '/reservations',
-    icon: faCalendar,
+    id: 'tips',
+    label: '러닝 꿀팁',
+    path: '/tips',
+    icon: Info,
   },
   {
     id: 'community',
     label: '커뮤니티',
     path: '/community',
-    icon: faUsers,
+    icon: Users,
   },
   {
     id: 'my',
     label: '마이',
     path: '/my',
-    icon: faUser,
+    icon: User,
   },
 ];
 
@@ -73,6 +66,8 @@ export default function BottomTabNavigation() {
             pathname === path ||
             (path !== '/' && path !== '/races' && pathname.startsWith(path));
 
+          const Icon = icon;
+
           return (
             <li key={id} className="flex-1">
               <motion.button
@@ -91,7 +86,7 @@ export default function BottomTabNavigation() {
                   transition={{ duration: 0.2 }}
                   aria-hidden="true"
                 >
-                  <FontAwesomeIcon icon={icon} className="w-6 h-6" />
+                  <Icon className="w-6 h-6" />
                 </motion.div>
                 <motion.span
                   className={`text-xs mt-1 ${

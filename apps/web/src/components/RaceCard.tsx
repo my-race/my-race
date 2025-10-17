@@ -1,11 +1,6 @@
 'use client';
 
-import {
-  faBuilding,
-  faCalendarAlt,
-  faMapMarkerAlt,
-} from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Building2, Calendar, MapPin } from 'lucide-react';
 import { Race } from '../lib/api/races';
 
 interface RaceCardProps {
@@ -24,24 +19,24 @@ export default function RaceCard({ race }: RaceCardProps) {
         </h2>
 
         <div className="flex items-center text-gray-600 text-sm">
-          <FontAwesomeIcon icon={faCalendarAlt} className="w-4 h-4 mr-2" />
+          <Calendar className="w-4 h-4 mr-2" />
           <span>대회일: {race.date}</span>
         </div>
 
         {race.period && (
           <div className="flex items-center text-gray-600 text-sm">
-            <FontAwesomeIcon icon={faCalendarAlt} className="w-4 h-4 mr-2" />
+            <Calendar className="w-4 h-4 mr-2" />
             <span>신청기간: {race.period}</span>
           </div>
         )}
 
         <div className="flex items-center text-gray-600 text-sm">
-          <FontAwesomeIcon icon={faMapMarkerAlt} className="w-4 h-4 mr-2" />
+          <MapPin className="w-4 h-4 mr-2" />
           <span>{race.location}</span>
         </div>
 
         <div className="flex items-center text-gray-600 text-sm">
-          <FontAwesomeIcon icon={faBuilding} className="w-4 h-4 mr-2" />
+          <Building2 className="w-4 h-4 mr-2" />
           <span>{race.host}</span>
         </div>
 

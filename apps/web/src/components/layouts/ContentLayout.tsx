@@ -38,7 +38,11 @@ export default function ContentLayout({ children }: ContentLayoutProps) {
   }, [setCanScrollUp, setCanScrollDown]);
 
   return (
-    <div ref={scrollRef} className="h-screen overflow-y-auto scrollbar-hide" style={{ scrollSnapType: 'y proximity' }}>
+    <div
+      ref={scrollRef}
+      className="h-screen overflow-y-auto scrollbar-hide"
+      style={{ scrollSnapType: 'y proximity' }}
+    >
       <div className="p-4">{children}</div>
       <style jsx>{`
         .scrollbar-hide {

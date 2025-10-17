@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { useEffect } from "react";
-import { useRouter } from "next/navigation";
-import useAuth from "./_hooks/useAuth";
+import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
+import useAuth from './_hooks/useAuth';
 
 export default function Home() {
   const router = useRouter();
@@ -10,7 +10,7 @@ export default function Home() {
 
   useEffect(() => {
     if (isLoggedIn) {
-      router.replace("/races");
+      router.replace('/races');
     }
   }, [isLoggedIn, router]);
 
@@ -28,7 +28,7 @@ export default function Home() {
         <h1 className="text-3xl font-bold text-gray-900 mb-4">My Race</h1>
         <p className="text-gray-600 mb-8">마라톤 대회 정보를 한눈에</p>
         <button
-          onClick={() => router.push("/login")}
+          onClick={() => router.push('/login')}
           className="px-6 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors"
         >
           로그인하고 시작하기
